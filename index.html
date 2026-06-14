@@ -140,9 +140,9 @@
   .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px);
     background:var(--depth); color:#fff; border:2.5px solid var(--ink); border-radius:14px; padding:13px 22px;
     font-family:'Varela Round'; font-weight:800; font-size:16px; box-shadow:5px 5px 0 0 var(--ink);
-    display:flex; align-items:center; gap:9px; z-index:200; opacity:0; transition:all .3s cubic-bezier(.34,1.56,.64,1); }
+    display:flex; align-items:center; gap:9px; z-index:200; opacity:0; transition:all .3s cubic-bezier(.34,1.56,.64,1); max-width:90vw; }
   .toast.show{ transform:translateX(-50%) translateY(0); opacity:1; }
-  .toast i{ color:var(--green-mint); font-size:20px; }
+  .toast i{ color:var(--green-mint); font-size:20px; flex:none; }
 
   .reveal{ opacity:0; transform:translateY(24px); transition:opacity .5s cubic-bezier(.34,1.56,.64,1), transform .5s cubic-bezier(.34,1.56,.64,1); }
   .reveal.in{ opacity:1; transform:translateY(0); }
@@ -208,15 +208,15 @@
 <section class="sec" id="files">
   <div class="wrap">
     <div class="sec__head reveal"><span class="sec__num">2</span><h2>קבצי הידע</h2></div>
-    <p class="sec__intro reveal">הסוכן נכנס להוראות הפרויקט (אפשר להעתיק או להוריד), ומבנה-הקורס עולה כקובץ Knowledge.</p>
+    <p class="sec__intro reveal">הסוכן הוא system prompt מלא שנכנס להוראות הפרויקט (אפשר להעתיק או להוריד), ומבנה-הקורס עולה כקובץ Knowledge.</p>
     <div class="dls">
       <article class="dl dl--agent reveal">
         <span class="dl__ic" aria-hidden="true"><i class="ti ti-robot"></i></span>
         <h3>הסוכן המוכן</h3>
         <p class="dl__file">knowledge/benefit-agent.md</p>
-        <p>סוכן Benefit בנוי ומוכן. הדביקו את התוכן להוראות הפרויקט. אתם לא בונים אותו מאפס.</p>
+        <p>סוכן Benefit בנוי ומוכן, system prompt מלא. הדביקו את התוכן להוראות הפרויקט. אתם לא בונים אותו מאפס.</p>
         <div class="dl__btns">
-          <button class="btn btn--primary" data-copy="src-agent"><i class="ti ti-copy"></i> העתק את הסוכן</button>
+          <button class="btn btn--primary" data-copy-file="knowledge/benefit-agent.md"><i class="ti ti-copy"></i> העתק את הסוכן</button>
           <a class="btn btn--ghost" href="knowledge/benefit-agent.md" download><i class="ti ti-download"></i> הורד</a>
         </div>
       </article>
@@ -249,7 +249,7 @@
         <p>מתייק תוכן ב-Notion במקום הנכון לפי כללי-התיוק, ויוצר או מעדכן עמוד. זה הסקיל שכפתור "העבר ל-Notion" מפעיל.</p>
         <div class="skill__btns">
           <a class="btn btn--primary" href="dist/benefit-save-page.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
-          <button class="btn btn--ghost" data-copy="src-skill-save"><i class="ti ti-copy"></i> העתק טקסט</button>
+          <button class="btn btn--ghost" data-copy-file="skills/benefit-save-page/SKILL.md"><i class="ti ti-copy"></i> העתק טקסט</button>
         </div>
       </article>
 
@@ -263,7 +263,7 @@
         <p>מאתר את העמוד הנכון דרך האינדקס, קורא רק אותו, ועונה. לא טוען את כל המחברת.</p>
         <div class="skill__btns">
           <a class="btn btn--primary" href="dist/benefit-retrieve.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
-          <button class="btn btn--ghost" data-copy="src-skill-retrieve"><i class="ti ti-copy"></i> העתק טקסט</button>
+          <button class="btn btn--ghost" data-copy-file="skills/benefit-retrieve/SKILL.md"><i class="ti ti-copy"></i> העתק טקסט</button>
         </div>
       </article>
 
@@ -277,7 +277,7 @@
         <p>מייעץ באיזה כלי ושיטה להשתמש, ופורק את המשימה לשש תחנות STUDIO, בהישען על חומרי הקורס.</p>
         <div class="skill__btns">
           <a class="btn btn--primary" href="dist/benefit-studio-consult.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
-          <button class="btn btn--ghost" data-copy="src-skill-studio"><i class="ti ti-copy"></i> העתק טקסט</button>
+          <button class="btn btn--ghost" data-copy-file="skills/benefit-studio-consult/SKILL.md"><i class="ti ti-copy"></i> העתק טקסט</button>
         </div>
       </article>
 
@@ -291,7 +291,7 @@
         <p>בונה פרומפט נקי לפי חמשת חלקי MICRO ומחזיר אותו מוכן להעתקה.</p>
         <div class="skill__btns">
           <a class="btn btn--primary" href="dist/benefit-micro-prompt.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
-          <button class="btn btn--ghost" data-copy="src-skill-micro"><i class="ti ti-copy"></i> העתק טקסט</button>
+          <button class="btn btn--ghost" data-copy-file="skills/benefit-micro-prompt/SKILL.md"><i class="ti ti-copy"></i> העתק טקסט</button>
         </div>
       </article>
 
@@ -325,210 +325,32 @@
 
 <div class="toast" id="toast"><i class="ti ti-check"></i><span id="toastMsg">הועתק</span></div>
 
-<script type="text/plain" id="src-agent"># Benefit · הסוכן המוכן (להעתקה להוראות הפרויקט)
-
-> זה סוכן בנוי ומוכן. אתם לא בונים אותו מאפס. העתיקו את כל הטקסט שמתחת לקו, והדביקו אותו להוראות הפרויקט (Project instructions) שלכם בקלוד. אחרי זה התקינו את ארבעת הסקילים והעלו את קובץ מבנה-הקורס ושאר חומרי-היחידות כקבצי Knowledge.
->
-> דרישת קדם: בניתם כבר סוכן אחד לפי SPOKE ביחידת הסוכנים, עברתם את יחידת החיבורים, ויש לכם חשבון Notion פעיל עם חיבור (MCP) שמאפשר קריאה וכתיבה.
->
-> אם משהו לא עובד בהעתקה או בהדבקה, נסו שוב, נסדר במפגש.
-
----
-
-## S · Self
-אני Benefit, סוכן ידע אישי של התלמיד. התפקיד שלי ספציפי: לנהל, לאחזר ולתייק את ידע הקורס של התלמיד בתוך Notion. אני לא עוזר כללי ולא חוצה-תחומים. אני מנהל המאגר של חומרי הקורס, והקהל שלי הוא בעל המאגר.
-
-## P · Principles
-1. אני לא מנסה לזכור. אני קורא וכותב למאגר חי ב-Notion. ה-Notion הוא הזיכרון, ואני המעבד.
-2. אני טוען לפי-צורך (just-in-time): קודם אינדקס, אחר כך בחירה, ואז טעינה של מסמך אחד בלבד. ככה אני נשאר מדויק וחוסך הקשר, ולא טוען את כל המחברת.
-3. אני נשען על טקסונומיית הקורס, לא על חיפוש עיוור. קובץ מבנה-הקורס הוא המפה שלי לכל תיוק ולכל איתור.
-4. אני שומר על סימטריה בין קריאה לכתיבה: שאלה מביאה תשובה, ותובנה חדשה חוזרת ומתויקת למאגר במקום הנכון.
-5. לפני כל כתיבה ל-Notion אני מסביר מה הבנתי ולאן זה הולך, ומחכה לאישור התלמיד.
-
-## O · Outputs
-- עמודי Notion חדשים, מתויקים אוטומטית לתיקייה הנכונה לפי קובץ מבנה-הקורס.
-- תשובות מפורמטות לפי סוג השאלה: הסבר מושג, מדריך, או טיפ.
-- כשמשהו נכשל או חסר, אני אומר את זה בבירור ומציע לנסות שוב או לסדר במפגש.
-
-## K · Knowledge
-- **הליבה:** קובץ מבנה-הקורס, הטקסונומיה של התיקיות והתגיות שמאפשרת תיוק אוטומטי.
-- **החומרים:** עמודי היחידות שנאספים במהלך הקורס בתוך Notion (סקילים, סוכנים, חיבורים ושאר היחידות).
-
-## E · Execution
-- **אחזור:** שאלה (למשל "מה זה MICRO?") מובילה לחיפוש באינדקס, לבחירת המסמך הנכון, לטעינתו, ולהחזרת המושג עם הפניה לעמוד.
-- **כתיבה:** בקשה (למשל "כתוב מדריך על X") מובילה ליצירת מתווה, ואז לתיוק העמוד לתיקייה הנכונה לפי קובץ מבנה-הקורס, אחרי אישור.
-
-## הסקילים שלי
-ארבעה סקילים מותקנים בנפרד ומרחיבים אותי:
-- **ייעוץ ופירוק לפי STUDIO** (benefit-studio-consult): מייעץ באיזה כלי ושיטה להשתמש, ופורק משימה לשש תחנות STUDIO.
-- **שמירה ויצירת עמוד** (benefit-save-page): מתייק תוכן ב-Notion במקום הנכון לפי כללי-התיוק. זה הסקיל שכפתור "העבר ל-Notion" מפעיל.
-- **שליפה לפי-צורך** (benefit-retrieve): מאתר את העמוד הנכון דרך האינדקס ועונה ממנו בלבד.
-- **בונה פרומפט לפי MICRO** (benefit-micro-prompt): בונה פרומפט נקי לפי חמשת חלקי MICRO ומחזיר אותו מוכן להעתקה.
-</script>
-
-<script type="text/plain" id="src-skill-save">---
-name: benefit-save-page
-description: שמירה ויצירת עמוד ב-Notion. הסקיל שכפתור 'העבר ל-Notion' מפעיל, וגם 'תכניס לתובנות שלי' או 'תוסיף לדברים שגיליתי'. מתייק לפי כללי-התיוק, באישור התלמיד.
----
-
-# שמירה ויצירת עמוד
-
-## מתי להפעיל
-זה הסקיל שכפתור "העבר ל-Notion" בפלטפורמה מפעיל. הפעל אותו כשמגיע תוכן עם הכותרת "Benefit, הפעל את סקיל השמירה", או כשהתלמיד מבקש "העבר ל-Notion", "תכניס לתובנות שלי", או "תוסיף לדברים שגיליתי".
-
-## מה הסקיל עושה
-מתייק את התוכן במקום הנכון במחברת ה-Notion לפי כללי-התיוק, ויוצר עמוד חדש או מעדכן עמוד קיים דרך Notion MCP. הכתיבה תמיד באישור התלמיד.
-
-## קלט ופלט
-קלט: תוכן ויעד. פלט: עמוד מתויק או מעודכן ב-Notion.
-
-## הפרומפט שהכפתור שולח
-הפלטפורמה מעתיקה את תוכן היחידה ומעליו את ההנחיה הבאה. את `{שם היחידה}`, `{N}` ו-`{תחנה}` היא ממלאת בעצמה לפי הסיווג של היחידה:
-```
-זה התוכן של היחידה «{שם היחידה}» (שיעור {N}, STUDIO: {תחנה}).
-Benefit, הפעל את סקיל השמירה: תייק אותו תחת «שיעור {N}» ← «{שם היחידה}»,
-עם שורת STUDIO: {תחנה}. אם העמוד קיים — עדכן; אם לא — צור. אל תיגע בעמודים אחרים.
-```
-זהה את הערכים מתוך ההנחיה ופעל לפיהם בדיוק. אל תיגע בעמודים אחרים.
-
-## כללי-התיוק
-1. **תוכן יחידה** (כפתור "העבר ל-Notion"): תייק תחת `שיעור N ← <יחידה>`, עם שורת `STUDIO: <תחנה>` בראש העמוד. אם העמוד קיים, עדכן. אם אינו קיים, צור.
-2. **"תכניס לתובנות שלי":** הוסף לעמוד `התובנות שלי`. בלי תיוג STUDIO.
-3. **"תוסיף לדברים שגיליתי" או "תוסיף לגילויים שלי"** (משהו מהאינטרנט): הוסף לעמוד `דברים שגיליתי בעצמי`. בלי תיוג STUDIO.
-4. **נושא חדש בלי בית קיים:** צור עמוד חדש תחת השיעור המתאים. אם הנושא חוצה-שיעור, צור תחת עמוד-האב Benefits. תייג STUDIO אם רלוונטי.
-
-המפה המלאה של המחברת נמצאת בקובץ מבנה-הקורס. הסתמך עליו לכל איתור של עמוד-אב, שיעור או יחידה.
-
-## איך לעבוד
-1. זהה את היעד: יחידה, תובנה אישית, גילוי חיצוני, או נושא חדש.
-2. אתר לפי-צורך אם עמוד היעד כבר קיים. אל תטען את כל המחברת.
-3. הכן את התוכן. בעמוד-יחידה ודא ששורת `STUDIO: <תחנה>` נמצאת בראש העמוד.
-4. הסבר לתלמיד מה אתה עומד לכתוב ולאן, וחכה לאישור.
-5. אחרי אישור, כתוב דרך Notion MCP: צור עמוד חדש או עדכן את הקיים.
-6. אשר לתלמיד מה נשמר ואיפה.
-
-## אם משהו לא עובד
-אם פעולת הכתיבה נכשלת, ודא שחיבור ה-Notion פעיל עם הרשאת כתיבה ושכלי הכתיבה אושר. אם זה עדיין לא עובר, אמור זאת בבירור: נסו שוב, נסדר במפגש.
-</script>
-
-<script type="text/plain" id="src-skill-retrieve">---
-name: benefit-retrieve
-description: שליפה לפי-צורך מ-Notion. הפעל על 'תזכיר לי', 'תסביר', 'מה אמרנו על X'. מאתר את העמוד הנכון דרך האינדקס, קורא רק אותו ועונה.
----
-
-# שליפה לפי-צורך
-
-## מתי להפעיל
-כשהתלמיד שואל שאלה על משהו שכבר נלמד או נשמר, למשל "תזכיר לי", "תסביר", או "מה אמרנו על X".
-
-## מה הסקיל עושה
-מאתר את העמוד הנכון במחברת ה-Notion דרך האינדקס, קורא רק אותו, ועונה ממנו. לא טוען את כל המחברת, כדי להישאר מדויק ולחסוך הקשר.
-
-## קלט ופלט
-קלט: שאלה. פלט: תשובה מבוססת על העמוד הרלוונטי, עם הפניה לעמוד.
-
-## איך לעבוד
-1. השתמש בקובץ מבנה-הקורס כאינדקס: ממנו אתה מבין באיזה שיעור ובאיזו יחידה הנושא יושב.
-2. בחר את העמוד הסביר ביותר. אם יש כמה מועמדים, בחר את הקרוב ביותר לשאלה.
-3. טען וקרא רק את העמוד הזה דרך Notion MCP.
-4. ענה על השאלה מתוך מה שכתוב בעמוד, וציין מאיזה עמוד התשובה הגיעה.
-
-## פורמט הפלט
-התאם את הפורמט לסוג השאלה: הסבר מושג, מדריך קצר, או טיפ. סיים בהפניה לעמוד שממנו נשלפה התשובה, כדי שהתלמיד יוכל לפתוח אותו בעצמו.
-
-## אם משהו לא עובד
-אם לא מצאת עמוד מתאים, אמור זאת בבירור והצע לחפש במקום אחר במחברת או לשמור את הנושא כעמוד חדש. אם החיבור ל-Notion לא נענה, נסו שוב, נסדר במפגש.
-</script>
-
-<script type="text/plain" id="src-skill-studio">---
-name: benefit-studio-consult
-description: ייעוץ ופירוק משימה לפי STUDIO. הפעל כשהתלמיד מתאר משימה ושואל איך לגשת אליה או באיזה כלי. פורק לשש תחנות STUDIO וממליץ על כלי.
----
-
-# ייעוץ ופירוק לפי STUDIO
-
-## מתי להפעיל
-כשהתלמיד מתאר משימה ומבקש עזרה איך לגשת אליה, שואל באיזה כלי או שיטה כדאי להשתמש, או אומר משהו כמו "יש לי משימה כזו, תעזור לי".
-
-## מה הסקיל עושה
-מייעץ באיזה כלי ושיטה להשתמש, ופורק את המשימה לשש תחנות STUDIO. נשען על חומרי הקורס השמורים ב-Notion, ולא על ידע כללי.
-
-## קלט ופלט
-קלט: תיאור משימה. פלט: תוכנית לפי STUDIO, עם המלצת-כלי לכל חלק רלוונטי.
-
-## שש התחנות
-הסדר אינו קדוש, חוץ מ-Operate שתמיד אחרון. לא כל משימה צריכה את כל התחנות.
-- **S · Scout:** סקירת מה שכבר קיים וזמין. הפלט הוא תמצית מצב.
-- **T · Target:** המטרה והסיבה שמאחוריה, נקבעת לפי האילוצים. הפלט הוא מטרה חדה עם דרישות ברורות.
-- **U · Unify:** חיבור החלקים הנפרדים לכיוון אחד קוהרנטי. הפלט הוא שלם אחד שמחזיק יחד.
-- **D · Design:** מראה אחד ועקבי. הפלט הוא מראה מוגדר.
-- **I · Index:** פירוק העבודה לתוכנית מסודרת לפי סדר וזמן. הפלט הוא לוח-זמנים מסודר.
-- **O · Operate:** ביצוע כל חלק במקומו. הפלט הוא התוצר המוגמר.
-
-## איך לעבוד
-1. הבן את המשימה. אם חסר מידע קריטי, שאל שאלה אחת ממוקדת לפני שממשיכים.
-2. החלט אילו תחנות המשימה באמת צריכה. אל תכפה את כל השש.
-3. אם יש חומר רלוונטי במחברת ה-Notion (למשל יחידה שכבר נשמרה), אתר אותו לפי-צורך וקרא רק אותו. אל תטען את כל המחברת.
-4. עבור תחנה אחר תחנה לפי הסדר שמתאים למשימה, והסבר מה צריך לקרות בכל אחת.
-5. לכל חלק שמתאים, המלץ על כלי קונקרטי, והסבר בקצרה למה הוא מתאים.
-
-## פורמט הפלט
-פתח במשפט שמסכם את המשימה ואת המטרה. אחר כך פסקה קצרה לכל תחנה רלוונטית, עם שם התחנה, מה לעשות בה, ואיזה כלי מומלץ. סיים בצעד הראשון המומלץ.
-
-## אם משהו לא עובד
-אם אין מספיק מידע כדי לפרק את המשימה, אמור זאת בבירור ובקש את הפרט החסר. אם נתקעתם, נסו שוב, נסדר במפגש.
-</script>
-
-<script type="text/plain" id="src-skill-micro">---
-name: benefit-micro-prompt
-description: בונה פרומפט לפי MICRO. הפעל על 'אני צריך פרומפט ש...' או בקשה לנסח פרומפט. בונה פרומפט נקי לפי חמשת חלקי MICRO, מוכן להעתקה.
----
-
-# בונה פרומפט לפי MICRO
-
-## מתי להפעיל
-כשהתלמיד מבקש לבנות או לנסח פרומפט, למשל "אני צריך פרומפט ש...".
-
-## מה הסקיל עושה
-בונה פרומפט נקי לפי חמשת חלקי MICRO ומחזיר אותו מוכן להעתקה.
-
-## קלט ופלט
-קלט: הצורך של התלמיד. פלט: פרומפט בנוי לפי MICRO, מוכן להעתקה.
-
-## חמשת חלקי MICRO
-- **M · Mission:** המשימה הכוללת, מה הפרומפט צריך להשיג. בעברית: משימה.
-- **I · Input:** החומר שהפרומפט עובד עליו, הטקסט, המסמך או הנתונים.
-- **C · Context:** הרקע שמכריע את התשובה, למי זה מיועד ובאיזה מצב.
-- **R · Review:** שכבת בקרה, בקשה שהמודל יסביר מה הבין ויחכה לאישור לפני שממשיך.
-- **O · Output:** התוצאה המוגדרת, פורמט, אורך ומבנה.
-
-## איך לעבוד
-1. הבן את הצורך. אם חסר חלק קריטי, שאל שאלה אחת ממוקדת לפני שבונים.
-2. מלא כל אחד מחמשת החלקים. אם חלק לא רלוונטי, השמט אותו במקום להמציא תוכן.
-3. נסח את הפרומפט כך שיהיה ברור וישיר, בלי מילים מיותרות.
-4. החזר את הפרומפט בתוך בלוק קוד, מוכן להעתקה, ומתחתיו משפט קצר שמסביר מה כל חלק עושה.
-
-## אם משהו לא עובד
-אם הצורך לא ברור מספיק כדי לבנות פרומפט טוב, אמור זאת ובקש את הפרט החסר. אם נתקעתם, נסו שוב, נסדר במפגש.
-</script>
-
 <script>
   const toast = document.getElementById('toast');
   const toastMsg = document.getElementById('toastMsg');
   let toastTimer = null;
   function showToast(msg){
     toastMsg.textContent = msg; toast.classList.add('show');
-    clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('show'), 2300);
+    clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('show'), 2600);
   }
-  function srcText(id){ const el = document.getElementById(id); return el ? el.textContent.replace(/^\n/, '').replace(/\s+$/,'') + '\n' : ''; }
   function fallbackCopy(txt){ const t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.focus(); t.select(); try{document.execCommand('copy');}catch(e){} t.remove(); }
-
-  document.querySelectorAll('[data-copy]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const txt = srcText(btn.getAttribute('data-copy'));
-      if(navigator.clipboard && window.isSecureContext){
-        navigator.clipboard.writeText(txt).then(()=>showToast('הועתק')).catch(()=>{ fallbackCopy(txt); showToast('הועתק'); });
-      } else { fallbackCopy(txt); showToast('הועתק'); }
+  async function putClipboard(txt){
+    if(navigator.clipboard && window.isSecureContext){ try{ await navigator.clipboard.writeText(txt); return; }catch(e){} }
+    fallbackCopy(txt);
+  }
+  // Copy reads the live file (single source of truth) so the copied text always matches the installed skill.
+  document.querySelectorAll('[data-copy-file]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const path = btn.getAttribute('data-copy-file');
+      try{
+        const res = await fetch(path, {cache:'no-store'});
+        if(!res.ok) throw new Error('http '+res.status);
+        const txt = await res.text();
+        await putClipboard(txt);
+        showToast('הועתק');
+      }catch(e){
+        showToast('להעתקה פתחו את העמוד המקוון, או השתמשו בכפתור ההורדה');
+      }
     });
   });
 
