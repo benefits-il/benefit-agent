@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Benefits · מארז Benefit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&family=Varela+Round&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.34.0/dist/tabler-icons.min.css">
+<style>
+  :root{
+    --canvas:#FFFBEB; --paper:#FFFFFF; --soft:#FEF3C7;
+    --ink:#0F172A; --anchor:#047857; --ui-green:#10B981; --depth:#064E3B;
+    --green-soft:#D1FAE5; --green-mint:#6EE7B7;
+    --sunshine:#FCD34D; --coral:#FB7185; --lavender:#A78BFA; --leaf:#84CC16; --sky:#38BDF8;
+    --gray-700:#334155; --gray-600:#475569; --gray-500:#64748B;
+    --block:0 6px 0 0 var(--depth); --block-hover:0 8px 0 0 var(--depth); --block-active:0 2px 0 0 var(--depth);
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Varela Round', system-ui, sans-serif; color:var(--gray-700); background:var(--canvas);
+    overflow-x:hidden; line-height:1.6; font-size:18px; }
+  :is(a,button,[tabindex]):focus-visible{ outline:3px solid var(--anchor); outline-offset:3px; border-radius:10px; }
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ transition-duration:.01ms!important; animation-duration:.01ms!important; } .reveal{ opacity:1!important; transform:none!important; } }
+
+  .top{ position:sticky; top:0; z-index:50; background:var(--paper); border-bottom:3px solid var(--ink);
+    padding:12px 24px; display:flex; align-items:center; gap:16px; }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand__logo{ width:38px; height:38px; flex:none; background:var(--paper); display:grid; place-items:center;
+    border:2.5px solid var(--ink); border-radius:11px; box-shadow:3px 3px 0 0 var(--ink); }
+  .brand__logo svg{ width:21px; height:27px; color:var(--anchor); direction:ltr; unicode-bidi:isolate; overflow:visible; }
+  .brand__name{ font-family:'Rubik'; font-weight:900; font-size:19px; letter-spacing:-.5px; color:var(--ink); line-height:1; }
+  .brand__sub{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gray-600); font-weight:600; margin-top:3px; }
+  .top__nav{ margin-right:auto; display:flex; gap:4px; align-items:center; }
+  .top__nav a{ color:var(--ink); text-decoration:none; padding:7px 13px; font-size:14px; font-weight:700; border-radius:999px; transition:background .2s; }
+  .top__nav a:hover{ background:var(--sunshine); }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px; }
+
+  .hero{ padding:56px 0 30px; position:relative; overflow:hidden; }
+  .hero::before{ content:""; position:absolute; top:-70px; left:-60px; width:220px; height:220px;
+    background:var(--green-soft); border:3px solid var(--ink); border-radius:50%; opacity:.5; z-index:0; }
+  .hero__inner{ position:relative; z-index:1; }
+  .kicker{ display:inline-flex; align-items:center; gap:8px; background:var(--lavender); color:var(--ink);
+    padding:8px 16px; border:2.5px solid var(--ink); border-radius:999px;
+    font-family:'Rubik'; font-size:13px; font-weight:700; box-shadow:4px 4px 0 0 var(--ink); margin-bottom:22px; }
+  .hero h1{ font-family:'Rubik'; font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.05;
+    letter-spacing:-1.5px; margin:0 0 20px; color:var(--ink); }
+  .hero h1 .hl{ background:var(--anchor); color:#fff; padding:0 12px; border:3px solid var(--ink);
+    border-radius:12px; box-shadow:5px 5px 0 0 var(--ink); display:inline-block; }
+  .contract{ background:var(--paper); border:3px solid var(--ink); border-radius:20px; padding:22px 26px;
+    box-shadow:6px 6px 0 0 var(--ink); position:relative; }
+  .contract__label{ display:inline-flex; align-items:center; gap:7px; font-family:'Rubik';
+    font-size:13px; font-weight:700; color:var(--anchor); letter-spacing:.3px; margin-bottom:8px; }
+  .contract p{ margin:0; font-size:18px; line-height:1.6; color:var(--gray-700); }
+  .contract code{ font-family:'JetBrains Mono',monospace; font-size:.86em; background:var(--soft);
+    border:1.5px solid var(--ink); border-radius:6px; padding:1px 6px; direction:ltr; unicode-bidi:isolate; display:inline-block; }
+
+  .sec{ padding:26px 0 6px; }
+  .sec__head{ display:flex; align-items:center; gap:13px; margin:0 0 18px; }
+  .sec__num{ width:42px; height:42px; flex:none; background:var(--anchor); color:#fff; border:2.5px solid var(--ink);
+    border-radius:12px; display:grid; place-items:center; font-family:'Rubik'; font-weight:900; font-size:20px;
+    box-shadow:3px 3px 0 0 var(--ink); }
+  .sec__head h2{ font-family:'Rubik'; font-size:clamp(23px,3.4vw,30px); font-weight:900; color:var(--ink);
+    margin:0; line-height:1.15; letter-spacing:-.5px; }
+  .sec__intro{ font-size:17px; color:var(--gray-600); margin:0 0 20px; max-width:700px; }
+
+  .steps{ display:grid; gap:12px; margin-bottom:8px; }
+  .step{ display:flex; gap:14px; align-items:flex-start; background:var(--paper); border:2.5px solid var(--ink);
+    border-radius:16px; padding:15px 18px; box-shadow:4px 4px 0 0 var(--ink); }
+  .step__n{ width:30px; height:30px; flex:none; background:var(--green-soft); color:var(--anchor); border:2px solid var(--ink);
+    border-radius:9px; display:grid; place-items:center; font-family:'Rubik'; font-weight:800; font-size:15px; }
+  .step__t{ font-size:17px; line-height:1.5; color:var(--gray-700); }
+  .step__t b{ color:var(--ink); font-family:'Rubik'; font-weight:700; }
+
+  .dls{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .dl{ background:var(--paper); border:3px solid var(--ink); border-radius:22px; padding:22px 22px 20px;
+    box-shadow:6px 6px 0 0 var(--ink); position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .dl::after{ content:""; position:absolute; top:-28px; left:-28px; width:88px; height:88px; border-radius:50%;
+    border:3px solid var(--ink); z-index:0; opacity:.85; }
+  .dl--agent::after{ background:var(--green-mint); }
+  .dl--structure::after{ background:var(--sunshine); }
+  .dl__ic{ width:46px; height:46px; flex:none; background:var(--green-soft); color:var(--anchor);
+    border:2.5px solid var(--ink); border-radius:13px; display:grid; place-items:center; font-size:24px;
+    box-shadow:3px 3px 0 0 var(--ink); position:relative; z-index:1; margin-bottom:13px; }
+  .dl h3{ font-family:'Rubik'; font-size:21px; font-weight:900; color:var(--ink); margin:0 0 4px; position:relative; z-index:1; }
+  .dl__file{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--gray-600); margin:0 0 10px; direction:ltr; unicode-bidi:isolate; position:relative; z-index:1; }
+  .dl p{ font-size:16px; line-height:1.55; color:var(--gray-700); margin:0 0 16px; position:relative; z-index:1; flex:1; }
+  .dl__btns{ display:flex; gap:10px; flex-wrap:wrap; position:relative; z-index:1; }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; text-decoration:none;
+    font-family:'Varela Round'; font-weight:800; font-size:15px; border:2.5px solid var(--ink); border-radius:999px;
+    padding:11px 18px; transition:all .15s cubic-bezier(.34,1.56,.64,1); white-space:nowrap; position:relative; z-index:1; }
+  .btn--primary{ background:var(--anchor); color:#fff; box-shadow:var(--block); }
+  .btn--primary:hover{ background:var(--depth); transform:translateY(-2px); box-shadow:var(--block-hover); }
+  .btn--primary:active{ transform:translateY(3px); box-shadow:var(--block-active); }
+  .btn--ghost{ background:var(--paper); color:var(--ink); box-shadow:3px 3px 0 0 var(--ink); }
+  .btn--ghost:hover{ background:var(--sunshine); transform:translate(-1px,-1px); box-shadow:4px 4px 0 0 var(--ink); }
+  .btn i{ font-size:18px; }
+
+  .skills{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .skill{ background:var(--paper); border:3px solid var(--ink); border-radius:22px; padding:20px 22px 18px;
+    box-shadow:6px 6px 0 0 var(--ink); position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .skill__top{ display:flex; align-items:center; gap:11px; margin-bottom:12px; }
+  .skill__ic{ width:44px; height:44px; flex:none; border:2.5px solid var(--ink); border-radius:12px;
+    display:grid; place-items:center; font-size:22px; box-shadow:3px 3px 0 0 var(--ink); }
+  .skill--class .skill__ic{ background:var(--green-soft); color:var(--anchor); }
+  .skill--home .skill__ic{ background:#EDE9FE; color:#6D28D9; }
+  .skill__badge{ margin-right:auto; display:inline-flex; align-items:center; gap:6px; font-family:'Rubik'; font-weight:700;
+    font-size:12px; padding:5px 12px; border:2px solid var(--ink); border-radius:999px; box-shadow:2px 2px 0 0 var(--ink); }
+  .skill--class .skill__badge{ background:var(--green-mint); color:var(--depth); }
+  .skill--home .skill__badge{ background:var(--lavender); color:var(--ink); }
+  .skill h3{ font-family:'Rubik'; font-size:20px; font-weight:900; color:var(--ink); margin:0 0 3px; line-height:1.2; }
+  .skill__slug{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--gray-600); margin:0 0 10px; direction:ltr; unicode-bidi:isolate; }
+  .skill p{ font-size:16px; line-height:1.55; color:var(--gray-700); margin:0 0 16px; flex:1; }
+  .skill__btns{ display:flex; gap:10px; flex-wrap:wrap; }
+
+  .install{ background:var(--depth); color:#E2E8F0; border:3px solid var(--ink); border-radius:22px;
+    padding:24px 26px; box-shadow:6px 6px 0 0 var(--ink); }
+  .install h2{ font-family:'Rubik'; font-size:22px; font-weight:900; color:#fff; margin:0 0 6px; display:flex; align-items:center; gap:10px; }
+  .install h2 i{ color:var(--green-mint); }
+  .install__sub{ font-size:15px; color:#A7F3D0; margin:0 0 18px; }
+  .install ol{ margin:0; padding:0; list-style:none; counter-reset:inst; display:grid; gap:11px; }
+  .install li{ counter-increment:inst; position:relative; padding-right:42px; font-size:16.5px; line-height:1.55; color:#E2E8F0; }
+  .install li::before{ content:counter(inst); position:absolute; right:0; top:-2px; width:28px; height:28px;
+    background:var(--green-mint); color:var(--depth); border:2px solid #000; border-radius:8px; display:grid; place-items:center;
+    font-family:'Rubik'; font-weight:800; font-size:14px; }
+  .install code{ font-family:'JetBrains Mono',monospace; font-size:.86em; background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25); border-radius:6px; padding:1px 6px; direction:ltr; unicode-bidi:isolate; display:inline-block; color:#fff; }
+  .install .note{ margin-top:16px; font-size:14.5px; color:#A7F3D0; display:flex; gap:8px; align-items:flex-start; }
+  .install .note i{ flex:none; margin-top:2px; }
+
+  .foot{ padding:34px 24px; background:var(--ink); color:#fff; text-align:center; margin-top:34px; }
+  .foot__inner{ max-width:920px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:12px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#cbd5e1; }
+  .foot b{ color:var(--green-mint); }
+
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px);
+    background:var(--depth); color:#fff; border:2.5px solid var(--ink); border-radius:14px; padding:13px 22px;
+    font-family:'Varela Round'; font-weight:800; font-size:16px; box-shadow:5px 5px 0 0 var(--ink);
+    display:flex; align-items:center; gap:9px; z-index:200; opacity:0; transition:all .3s cubic-bezier(.34,1.56,.64,1); }
+  .toast.show{ transform:translateX(-50%) translateY(0); opacity:1; }
+  .toast i{ color:var(--green-mint); font-size:20px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .5s cubic-bezier(.34,1.56,.64,1), transform .5s cubic-bezier(.34,1.56,.64,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width:680px){
+    .top{ padding:10px 14px; gap:9px; }
+    .top__nav{ display:none; }
+    .wrap{ padding:0 16px; }
+    .hero{ padding:38px 0 22px; }
+    .dls, .skills{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="logo-b" viewBox="824 453 2250 2991">
+    <path fill="currentColor" fill-rule="evenodd" d="M826.492 3236.77C825.424 3122.47 824.356 2449.49 824.356 1741.27L824 453 1531.56 453C2204.58 453 2241.97 453.356 2291.11 459.765 2399.72 474.008 2482.33 498.221 2570.64 542.018 2723.41 617.505 2837 715.78 2927.09 850.376 2960.56 900.582 3002.58 982.834 3022.88 1038.74 3040.69 1086.45 3058.13 1157.67 3065.97 1213.57 3074.16 1269.47 3075.23 1407.63 3068.1 1460.68 3041.75 1653.32 2948.1 1834.56 2806.02 1968.44L2765.78 2006.54 2787.5 2024.7C2937.77 2149.32 3036.77 2323.8 3066.32 2514.65 3075.23 2572.69 3075.23 2703.73 3066.32 2759.99 3030.71 2986.09 2906.44 3178.73 2714.15 3307.27 2618.36 3371.01 2506.54 3414.45 2383.69 3435.45 2348.79 3441.51 2298.94 3442.22 1587.47 3442.93L828.63 3444 826.492 3236.77ZM2375.15 3229.65C2591.65 3181.22 2762.58 3034.87 2835.57 2835.83 2900.03 2659.93 2876.88 2476.91 2769.34 2315.61 2684.24 2188.14 2552.48 2099.47 2390.81 2061.73L2356.98 2053.9 1783.67 2051.76 1210.36 2049.98 1209.29 1442.17 1208.58 833.996 1706.04 833.996C2245.88 833.996 2233.06 833.64 2308.56 853.581 2498 904.143 2632.6 1041.59 2676.4 1229.24 2685.66 1269.12 2689.22 1378.07 2682.81 1431.84 2671.77 1527.62 2637.23 1617.71 2585.95 1684.3 2573.13 1700.67 2569.93 1702.81 2558.53 1702.81 2551.41 1702.81 2540.02 1701.03 2533.25 1699.25 2510.46 1692.48 2439.6 1681.45 2382.98 1675.39L2326.72 1669.34 2326.72 1657.95C2326.72 1649.04 2329.21 1644.42 2338.47 1638.36 2413.25 1585.66 2464.88 1501.63 2479.84 1406.2 2485.18 1372.73 2482.69 1310.78 2474.85 1281.22 2442.45 1161.94 2357.7 1079.69 2232.71 1046.57 2203.86 1038.74 2203.15 1038.74 1808.6 1038.74L1413.34 1038.74 1412.27 1414.39C1411.56 1620.91 1412.27 1803.22 1413.34 1819.25L1415.83 1848.44 1895.13 1849.87C2318.88 1850.94 2379.06 1851.65 2410.4 1856.63 2458.12 1864.47 2505.48 1875.15 2538.24 1885.83L2565.66 1894.38 2594.86 1872.66C2635.81 1842.39 2703.82 1775.09 2734.8 1734.15 2781.8 1671.48 2810.29 1618.07 2836.29 1542.58 2882.94 1407.27 2882.58 1273.39 2835.22 1136.66 2775.4 964.319 2649.34 818.329 2490.52 736.433 2426.78 703.674 2393.66 690.5 2342.74 677.325 2251.22 653.824 2286.48 654.892 1628.06 653.468L1030.53 652.044 1030.53 1946.72 1030.53 3241.04 1681.47 3239.97 2332.06 3238.9 2375.15 3229.65Z"/>
+    <path fill="currentColor" fill-rule="evenodd" d="M1213 2646.36 1213 2226.07 1314.43 2226.07 1415.86 2226.07 1415.86 2544.85 1415.86 2863.62 1845.79 2863.62C2328.76 2863.62 2301.35 2865.05 2358.65 2836.55 2447.27 2792.74 2498.88 2697.29 2481.79 2608.96 2463.29 2511.37 2384.63 2440.84 2282.84 2430.51L2259.35 2428.02 2259.35 2326.51 2259.35 2225 2301.35 2227.14C2375.02 2230.7 2457.24 2257.41 2515.6 2297.3 2528.06 2305.85 2550.84 2324.73 2566.14 2339.33 2629.14 2399.53 2663.66 2462.21 2681.45 2548.41 2689.29 2587.23 2690.35 2688.39 2683.23 2724.71 2666.51 2810.91 2628.07 2882.5 2566.5 2942.34 2505.64 3001.46 2440.51 3036.73 2353.67 3057.03 2321.99 3064.51 2317.01 3064.51 1767.5 3065.58L1213 3067 1213 2646.36Z"/>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="brand">
+    <span class="brand__logo"><svg aria-hidden="true" preserveAspectRatio="xMidYMid meet"><use href="#logo-b"/></svg></span>
+    <div>
+      <div class="brand__name">Benefits</div>
+      <div class="brand__sub">// מארז Benefit</div>
+    </div>
+  </div>
+  <nav class="top__nav" aria-label="ניווט">
+    <a href="#how">איך מרכיבים</a>
+    <a href="#files">קבצי הידע</a>
+    <a href="#skills">הסקילים</a>
+    <a href="#install">התקנת סקיל</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero__inner">
+    <span class="kicker"><i class="ti ti-robot"></i> שכבות זיכרון · שיעור 2</span>
+    <h1>מארז <span class="hl">Benefit</span></h1>
+    <div class="contract reveal">
+      <div class="contract__label"><i class="ti ti-package"></i> מה יש במארז הזה?</div>
+      <p>כל מה שצריך כדי להעמיד את סוכן ה-Benefit שלכם: הסוכן הבנוי להדבקה, קובץ <code>course-structure</code> שהוא המפה של מחברת ה-Notion שלכם, וארבעה סקילים ארוזים כקובץ <code>ZIP</code> מוכן להעלאה. מורידים מכאן ומתקינים. אם משהו לא עובד, נסו שוב, נסדר במפגש.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec__head reveal"><span class="sec__num"><i class="ti ti-list-check"></i></span><h2>איך מרכיבים את Benefit</h2></div>
+    <p class="sec__intro reveal">ארבעה צעדים, בסדר הזה. הכל להורדה מהעמוד הזה.</p>
+    <div class="steps reveal">
+      <div class="step"><span class="step__n">1</span><div class="step__t"><b>הורידו את הסוכן המוכן</b> והדביקו אותו להוראות הפרויקט (Project instructions) בקלוד.</div></div>
+      <div class="step"><span class="step__n">2</span><div class="step__t"><b>הורידו את קובץ מבנה-הקורס</b> והעלו אותו לפרויקט כקובץ Knowledge, יחד עם שאר חומרי-היחידות.</div></div>
+      <div class="step"><span class="step__n">3</span><div class="step__t"><b>הורידו והתקינו את ארבעת הסקילים</b> לפי ההסבר שבתחתית העמוד.</div></div>
+      <div class="step"><span class="step__n">4</span><div class="step__t"><b>חברו את Notion</b> דרך החיבור (MCP), עם הרשאת קריאה וכתיבה, ואשרו את כלי הכתיבה כשהוא מבקש.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="files">
+  <div class="wrap">
+    <div class="sec__head reveal"><span class="sec__num">2</span><h2>קבצי הידע</h2></div>
+    <p class="sec__intro reveal">הסוכן נכנס להוראות הפרויקט (אפשר להעתיק או להוריד), ומבנה-הקורס עולה כקובץ Knowledge.</p>
+    <div class="dls">
+      <article class="dl dl--agent reveal">
+        <span class="dl__ic" aria-hidden="true"><i class="ti ti-robot"></i></span>
+        <h3>הסוכן המוכן</h3>
+        <p class="dl__file">knowledge/benefit-agent.md</p>
+        <p>סוכן Benefit בנוי ומוכן. הדביקו את התוכן להוראות הפרויקט. אתם לא בונים אותו מאפס.</p>
+        <div class="dl__btns">
+          <button class="btn btn--primary" data-copy="src-agent"><i class="ti ti-copy"></i> העתק את הסוכן</button>
+          <a class="btn btn--ghost" href="knowledge/benefit-agent.md" download><i class="ti ti-download"></i> הורד</a>
+        </div>
+      </article>
+      <article class="dl dl--structure reveal">
+        <span class="dl__ic" aria-hidden="true"><i class="ti ti-sitemap"></i></span>
+        <h3>מבנה הקורס</h3>
+        <p class="dl__file">knowledge/course-structure.md</p>
+        <p>המפה של מחברת ה-Notion שלכם וכללי-התיוק. זה קובץ הידע שהופך את התיוק לאוטומטי. העלו אותו לפרויקט כקובץ Knowledge.</p>
+        <div class="dl__btns">
+          <a class="btn btn--primary" href="knowledge/course-structure.md" download><i class="ti ti-download"></i> הורד את המבנה</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="skills">
+  <div class="wrap">
+    <div class="sec__head reveal"><span class="sec__num">3</span><h2>ארבעת הסקילים</h2></div>
+    <p class="sec__intro reveal">כל סקיל מורד כקובץ ZIP מוכן להעלאה לקלוד. שניים מתקינים ומריצים בכיתה (שמירה ושליפה, שני הכיוונים של המאגר), ושניים בבית (ייעוץ STUDIO ובניית פרומפט MICRO). אפשר גם להעתיק את הטקסט אם מעדיפים את ה-Skill Creator.</p>
+    <div class="skills">
+
+      <article class="skill skill--class reveal">
+        <div class="skill__top">
+          <span class="skill__ic" aria-hidden="true"><i class="ti ti-device-floppy"></i></span>
+          <span class="skill__badge"><i class="ti ti-school"></i> בכיתה</span>
+        </div>
+        <h3>שמירה ויצירת עמוד</h3>
+        <p class="skill__slug">benefit-save-page</p>
+        <p>מתייק תוכן ב-Notion במקום הנכון לפי כללי-התיוק, ויוצר או מעדכן עמוד. זה הסקיל שכפתור "העבר ל-Notion" מפעיל.</p>
+        <div class="skill__btns">
+          <a class="btn btn--primary" href="dist/benefit-save-page.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
+          <button class="btn btn--ghost" data-copy="src-skill-save"><i class="ti ti-copy"></i> העתק טקסט</button>
+        </div>
+      </article>
+
+      <article class="skill skill--class reveal">
+        <div class="skill__top">
+          <span class="skill__ic" aria-hidden="true"><i class="ti ti-search"></i></span>
+          <span class="skill__badge"><i class="ti ti-school"></i> בכיתה</span>
+        </div>
+        <h3>שליפה לפי-צורך</h3>
+        <p class="skill__slug">benefit-retrieve</p>
+        <p>מאתר את העמוד הנכון דרך האינדקס, קורא רק אותו, ועונה. לא טוען את כל המחברת.</p>
+        <div class="skill__btns">
+          <a class="btn btn--primary" href="dist/benefit-retrieve.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
+          <button class="btn btn--ghost" data-copy="src-skill-retrieve"><i class="ti ti-copy"></i> העתק טקסט</button>
+        </div>
+      </article>
+
+      <article class="skill skill--home reveal">
+        <div class="skill__top">
+          <span class="skill__ic" aria-hidden="true"><i class="ti ti-compass"></i></span>
+          <span class="skill__badge"><i class="ti ti-home"></i> בבית</span>
+        </div>
+        <h3>ייעוץ ופירוק לפי STUDIO</h3>
+        <p class="skill__slug">benefit-studio-consult</p>
+        <p>מייעץ באיזה כלי ושיטה להשתמש, ופורק את המשימה לשש תחנות STUDIO, בהישען על חומרי הקורס.</p>
+        <div class="skill__btns">
+          <a class="btn btn--primary" href="dist/benefit-studio-consult.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
+          <button class="btn btn--ghost" data-copy="src-skill-studio"><i class="ti ti-copy"></i> העתק טקסט</button>
+        </div>
+      </article>
+
+      <article class="skill skill--home reveal">
+        <div class="skill__top">
+          <span class="skill__ic" aria-hidden="true"><i class="ti ti-prompt"></i></span>
+          <span class="skill__badge"><i class="ti ti-home"></i> בבית</span>
+        </div>
+        <h3>בונה פרומפט לפי MICRO</h3>
+        <p class="skill__slug">benefit-micro-prompt</p>
+        <p>בונה פרומפט נקי לפי חמשת חלקי MICRO ומחזיר אותו מוכן להעתקה.</p>
+        <div class="skill__btns">
+          <a class="btn btn--primary" href="dist/benefit-micro-prompt.zip" download><i class="ti ti-download"></i> הורד ZIP</a>
+          <button class="btn btn--ghost" data-copy="src-skill-micro"><i class="ti ti-copy"></i> העתק טקסט</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="install">
+  <div class="wrap">
+    <div class="install reveal">
+      <h2><i class="ti ti-download"></i> איך מתקינים סקיל בקלוד</h2>
+      <p class="install__sub">כל סקיל יורד כקובץ ZIP מוכן. ה-ZIP כבר בנוי נכון, אין צורך לדחוס דבר.</p>
+      <ol>
+        <li>ודאו שהרצת קוד (Code execution) מופעלת בהגדרות, תחת <code>Capabilities</code> או <code>Features</code>.</li>
+        <li>הורידו את קובץ ה-ZIP של הסקיל מהכרטיס למעלה.</li>
+        <li>בקלוד, היכנסו ל-<code>Settings</code>, ובמקטע <code>Skills</code> בחרו העלאה (Upload skill).</li>
+        <li>העלו את קובץ ה-ZIP. חזרו על זה לכל אחד מארבעת הסקילים.</li>
+        <li>פתחו את פרויקט Benefit, והסקילים זמינים לשימוש.</li>
+      </ol>
+      <div class="note"><i class="ti ti-bulb"></i><span>חלופה: אפשר ליצור סקיל חדש דרך ה-Skill Creator בקלוד ולהדביק לתוכו את הטקסט מכפתור "העתק טקסט", בלי ZIP. אם ההתקנה לא עובדת, נסו שוב, נסדר במפגש.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <span>Benefits · <b>AI that finally fits</b> · בן עקיבא</span>
+    <span>מארז Benefit · שכבות זיכרון</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="ti ti-check"></i><span id="toastMsg">הועתק</span></div>
+
+<script type="text/plain" id="src-agent"># Benefit · הסוכן המוכן (להעתקה להוראות הפרויקט)
+
+> זה סוכן בנוי ומוכן. אתם לא בונים אותו מאפס. העתיקו את כל הטקסט שמתחת לקו, והדביקו אותו להוראות הפרויקט (Project instructions) שלכם בקלוד. אחרי זה התקינו את ארבעת הסקילים והעלו את קובץ מבנה-הקורס ושאר חומרי-היחידות כקבצי Knowledge.
+>
+> דרישת קדם: בניתם כבר סוכן אחד לפי SPOKE ביחידת הסוכנים, עברתם את יחידת החיבורים, ויש לכם חשבון Notion פעיל עם חיבור (MCP) שמאפשר קריאה וכתיבה.
+>
+> אם משהו לא עובד בהעתקה או בהדבקה, נסו שוב, נסדר במפגש.
+
+---
+
+## S · Self
+אני Benefit, סוכן ידע אישי של התלמיד. התפקיד שלי ספציפי: לנהל, לאחזר ולתייק את ידע הקורס של התלמיד בתוך Notion. אני לא עוזר כללי ולא חוצה-תחומים. אני מנהל המאגר של חומרי הקורס, והקהל שלי הוא בעל המאגר.
+
+## P · Principles
+1. אני לא מנסה לזכור. אני קורא וכותב למאגר חי ב-Notion. ה-Notion הוא הזיכרון, ואני המעבד.
+2. אני טוען לפי-צורך (just-in-time): קודם אינדקס, אחר כך בחירה, ואז טעינה של מסמך אחד בלבד. ככה אני נשאר מדויק וחוסך הקשר, ולא טוען את כל המחברת.
+3. אני נשען על טקסונומיית הקורס, לא על חיפוש עיוור. קובץ מבנה-הקורס הוא המפה שלי לכל תיוק ולכל איתור.
+4. אני שומר על סימטריה בין קריאה לכתיבה: שאלה מביאה תשובה, ותובנה חדשה חוזרת ומתויקת למאגר במקום הנכון.
+5. לפני כל כתיבה ל-Notion אני מסביר מה הבנתי ולאן זה הולך, ומחכה לאישור התלמיד.
+
+## O · Outputs
+- עמודי Notion חדשים, מתויקים אוטומטית לתיקייה הנכונה לפי קובץ מבנה-הקורס.
+- תשובות מפורמטות לפי סוג השאלה: הסבר מושג, מדריך, או טיפ.
+- כשמשהו נכשל או חסר, אני אומר את זה בבירור ומציע לנסות שוב או לסדר במפגש.
+
+## K · Knowledge
+- **הליבה:** קובץ מבנה-הקורס, הטקסונומיה של התיקיות והתגיות שמאפשרת תיוק אוטומטי.
+- **החומרים:** עמודי היחידות שנאספים במהלך הקורס בתוך Notion (סקילים, סוכנים, חיבורים ושאר היחידות).
+
+## E · Execution
+- **אחזור:** שאלה (למשל "מה זה MICRO?") מובילה לחיפוש באינדקס, לבחירת המסמך הנכון, לטעינתו, ולהחזרת המושג עם הפניה לעמוד.
+- **כתיבה:** בקשה (למשל "כתוב מדריך על X") מובילה ליצירת מתווה, ואז לתיוק העמוד לתיקייה הנכונה לפי קובץ מבנה-הקורס, אחרי אישור.
+
+## הסקילים שלי
+ארבעה סקילים מותקנים בנפרד ומרחיבים אותי:
+- **ייעוץ ופירוק לפי STUDIO** (benefit-studio-consult): מייעץ באיזה כלי ושיטה להשתמש, ופורק משימה לשש תחנות STUDIO.
+- **שמירה ויצירת עמוד** (benefit-save-page): מתייק תוכן ב-Notion במקום הנכון לפי כללי-התיוק. זה הסקיל שכפתור "העבר ל-Notion" מפעיל.
+- **שליפה לפי-צורך** (benefit-retrieve): מאתר את העמוד הנכון דרך האינדקס ועונה ממנו בלבד.
+- **בונה פרומפט לפי MICRO** (benefit-micro-prompt): בונה פרומפט נקי לפי חמשת חלקי MICRO ומחזיר אותו מוכן להעתקה.
+</script>
+
+<script type="text/plain" id="src-skill-save">---
+name: benefit-save-page
+description: שמירה ויצירת עמוד ב-Notion. הסקיל שכפתור 'העבר ל-Notion' מפעיל, וגם 'תכניס לתובנות שלי' או 'תוסיף לדברים שגיליתי'. מתייק לפי כללי-התיוק, באישור התלמיד.
+---
+
+# שמירה ויצירת עמוד
+
+## מתי להפעיל
+זה הסקיל שכפתור "העבר ל-Notion" בפלטפורמה מפעיל. הפעל אותו כשמגיע תוכן עם הכותרת "Benefit, הפעל את סקיל השמירה", או כשהתלמיד מבקש "העבר ל-Notion", "תכניס לתובנות שלי", או "תוסיף לדברים שגיליתי".
+
+## מה הסקיל עושה
+מתייק את התוכן במקום הנכון במחברת ה-Notion לפי כללי-התיוק, ויוצר עמוד חדש או מעדכן עמוד קיים דרך Notion MCP. הכתיבה תמיד באישור התלמיד.
+
+## קלט ופלט
+קלט: תוכן ויעד. פלט: עמוד מתויק או מעודכן ב-Notion.
+
+## הפרומפט שהכפתור שולח
+הפלטפורמה מעתיקה את תוכן היחידה ומעליו את ההנחיה הבאה. את `{שם היחידה}`, `{N}` ו-`{תחנה}` היא ממלאת בעצמה לפי הסיווג של היחידה:
+```
+זה התוכן של היחידה «{שם היחידה}» (שיעור {N}, STUDIO: {תחנה}).
+Benefit, הפעל את סקיל השמירה: תייק אותו תחת «שיעור {N}» ← «{שם היחידה}»,
+עם שורת STUDIO: {תחנה}. אם העמוד קיים — עדכן; אם לא — צור. אל תיגע בעמודים אחרים.
+```
+זהה את הערכים מתוך ההנחיה ופעל לפיהם בדיוק. אל תיגע בעמודים אחרים.
+
+## כללי-התיוק
+1. **תוכן יחידה** (כפתור "העבר ל-Notion"): תייק תחת `שיעור N ← <יחידה>`, עם שורת `STUDIO: <תחנה>` בראש העמוד. אם העמוד קיים, עדכן. אם אינו קיים, צור.
+2. **"תכניס לתובנות שלי":** הוסף לעמוד `התובנות שלי`. בלי תיוג STUDIO.
+3. **"תוסיף לדברים שגיליתי" או "תוסיף לגילויים שלי"** (משהו מהאינטרנט): הוסף לעמוד `דברים שגיליתי בעצמי`. בלי תיוג STUDIO.
+4. **נושא חדש בלי בית קיים:** צור עמוד חדש תחת השיעור המתאים. אם הנושא חוצה-שיעור, צור תחת עמוד-האב Benefits. תייג STUDIO אם רלוונטי.
+
+המפה המלאה של המחברת נמצאת בקובץ מבנה-הקורס. הסתמך עליו לכל איתור של עמוד-אב, שיעור או יחידה.
+
+## איך לעבוד
+1. זהה את היעד: יחידה, תובנה אישית, גילוי חיצוני, או נושא חדש.
+2. אתר לפי-צורך אם עמוד היעד כבר קיים. אל תטען את כל המחברת.
+3. הכן את התוכן. בעמוד-יחידה ודא ששורת `STUDIO: <תחנה>` נמצאת בראש העמוד.
+4. הסבר לתלמיד מה אתה עומד לכתוב ולאן, וחכה לאישור.
+5. אחרי אישור, כתוב דרך Notion MCP: צור עמוד חדש או עדכן את הקיים.
+6. אשר לתלמיד מה נשמר ואיפה.
+
+## אם משהו לא עובד
+אם פעולת הכתיבה נכשלת, ודא שחיבור ה-Notion פעיל עם הרשאת כתיבה ושכלי הכתיבה אושר. אם זה עדיין לא עובר, אמור זאת בבירור: נסו שוב, נסדר במפגש.
+</script>
+
+<script type="text/plain" id="src-skill-retrieve">---
+name: benefit-retrieve
+description: שליפה לפי-צורך מ-Notion. הפעל על 'תזכיר לי', 'תסביר', 'מה אמרנו על X'. מאתר את העמוד הנכון דרך האינדקס, קורא רק אותו ועונה.
+---
+
+# שליפה לפי-צורך
+
+## מתי להפעיל
+כשהתלמיד שואל שאלה על משהו שכבר נלמד או נשמר, למשל "תזכיר לי", "תסביר", או "מה אמרנו על X".
+
+## מה הסקיל עושה
+מאתר את העמוד הנכון במחברת ה-Notion דרך האינדקס, קורא רק אותו, ועונה ממנו. לא טוען את כל המחברת, כדי להישאר מדויק ולחסוך הקשר.
+
+## קלט ופלט
+קלט: שאלה. פלט: תשובה מבוססת על העמוד הרלוונטי, עם הפניה לעמוד.
+
+## איך לעבוד
+1. השתמש בקובץ מבנה-הקורס כאינדקס: ממנו אתה מבין באיזה שיעור ובאיזו יחידה הנושא יושב.
+2. בחר את העמוד הסביר ביותר. אם יש כמה מועמדים, בחר את הקרוב ביותר לשאלה.
+3. טען וקרא רק את העמוד הזה דרך Notion MCP.
+4. ענה על השאלה מתוך מה שכתוב בעמוד, וציין מאיזה עמוד התשובה הגיעה.
+
+## פורמט הפלט
+התאם את הפורמט לסוג השאלה: הסבר מושג, מדריך קצר, או טיפ. סיים בהפניה לעמוד שממנו נשלפה התשובה, כדי שהתלמיד יוכל לפתוח אותו בעצמו.
+
+## אם משהו לא עובד
+אם לא מצאת עמוד מתאים, אמור זאת בבירור והצע לחפש במקום אחר במחברת או לשמור את הנושא כעמוד חדש. אם החיבור ל-Notion לא נענה, נסו שוב, נסדר במפגש.
+</script>
+
+<script type="text/plain" id="src-skill-studio">---
+name: benefit-studio-consult
+description: ייעוץ ופירוק משימה לפי STUDIO. הפעל כשהתלמיד מתאר משימה ושואל איך לגשת אליה או באיזה כלי. פורק לשש תחנות STUDIO וממליץ על כלי.
+---
+
+# ייעוץ ופירוק לפי STUDIO
+
+## מתי להפעיל
+כשהתלמיד מתאר משימה ומבקש עזרה איך לגשת אליה, שואל באיזה כלי או שיטה כדאי להשתמש, או אומר משהו כמו "יש לי משימה כזו, תעזור לי".
+
+## מה הסקיל עושה
+מייעץ באיזה כלי ושיטה להשתמש, ופורק את המשימה לשש תחנות STUDIO. נשען על חומרי הקורס השמורים ב-Notion, ולא על ידע כללי.
+
+## קלט ופלט
+קלט: תיאור משימה. פלט: תוכנית לפי STUDIO, עם המלצת-כלי לכל חלק רלוונטי.
+
+## שש התחנות
+הסדר אינו קדוש, חוץ מ-Operate שתמיד אחרון. לא כל משימה צריכה את כל התחנות.
+- **S · Scout:** סקירת מה שכבר קיים וזמין. הפלט הוא תמצית מצב.
+- **T · Target:** המטרה והסיבה שמאחוריה, נקבעת לפי האילוצים. הפלט הוא מטרה חדה עם דרישות ברורות.
+- **U · Unify:** חיבור החלקים הנפרדים לכיוון אחד קוהרנטי. הפלט הוא שלם אחד שמחזיק יחד.
+- **D · Design:** מראה אחד ועקבי. הפלט הוא מראה מוגדר.
+- **I · Index:** פירוק העבודה לתוכנית מסודרת לפי סדר וזמן. הפלט הוא לוח-זמנים מסודר.
+- **O · Operate:** ביצוע כל חלק במקומו. הפלט הוא התוצר המוגמר.
+
+## איך לעבוד
+1. הבן את המשימה. אם חסר מידע קריטי, שאל שאלה אחת ממוקדת לפני שממשיכים.
+2. החלט אילו תחנות המשימה באמת צריכה. אל תכפה את כל השש.
+3. אם יש חומר רלוונטי במחברת ה-Notion (למשל יחידה שכבר נשמרה), אתר אותו לפי-צורך וקרא רק אותו. אל תטען את כל המחברת.
+4. עבור תחנה אחר תחנה לפי הסדר שמתאים למשימה, והסבר מה צריך לקרות בכל אחת.
+5. לכל חלק שמתאים, המלץ על כלי קונקרטי, והסבר בקצרה למה הוא מתאים.
+
+## פורמט הפלט
+פתח במשפט שמסכם את המשימה ואת המטרה. אחר כך פסקה קצרה לכל תחנה רלוונטית, עם שם התחנה, מה לעשות בה, ואיזה כלי מומלץ. סיים בצעד הראשון המומלץ.
+
+## אם משהו לא עובד
+אם אין מספיק מידע כדי לפרק את המשימה, אמור זאת בבירור ובקש את הפרט החסר. אם נתקעתם, נסו שוב, נסדר במפגש.
+</script>
+
+<script type="text/plain" id="src-skill-micro">---
+name: benefit-micro-prompt
+description: בונה פרומפט לפי MICRO. הפעל על 'אני צריך פרומפט ש...' או בקשה לנסח פרומפט. בונה פרומפט נקי לפי חמשת חלקי MICRO, מוכן להעתקה.
+---
+
+# בונה פרומפט לפי MICRO
+
+## מתי להפעיל
+כשהתלמיד מבקש לבנות או לנסח פרומפט, למשל "אני צריך פרומפט ש...".
+
+## מה הסקיל עושה
+בונה פרומפט נקי לפי חמשת חלקי MICRO ומחזיר אותו מוכן להעתקה.
+
+## קלט ופלט
+קלט: הצורך של התלמיד. פלט: פרומפט בנוי לפי MICRO, מוכן להעתקה.
+
+## חמשת חלקי MICRO
+- **M · Mission:** המשימה הכוללת, מה הפרומפט צריך להשיג. בעברית: משימה.
+- **I · Input:** החומר שהפרומפט עובד עליו, הטקסט, המסמך או הנתונים.
+- **C · Context:** הרקע שמכריע את התשובה, למי זה מיועד ובאיזה מצב.
+- **R · Review:** שכבת בקרה, בקשה שהמודל יסביר מה הבין ויחכה לאישור לפני שממשיך.
+- **O · Output:** התוצאה המוגדרת, פורמט, אורך ומבנה.
+
+## איך לעבוד
+1. הבן את הצורך. אם חסר חלק קריטי, שאל שאלה אחת ממוקדת לפני שבונים.
+2. מלא כל אחד מחמשת החלקים. אם חלק לא רלוונטי, השמט אותו במקום להמציא תוכן.
+3. נסח את הפרומפט כך שיהיה ברור וישיר, בלי מילים מיותרות.
+4. החזר את הפרומפט בתוך בלוק קוד, מוכן להעתקה, ומתחתיו משפט קצר שמסביר מה כל חלק עושה.
+
+## אם משהו לא עובד
+אם הצורך לא ברור מספיק כדי לבנות פרומפט טוב, אמור זאת ובקש את הפרט החסר. אם נתקעתם, נסו שוב, נסדר במפגש.
+</script>
+
+<script>
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  let toastTimer = null;
+  function showToast(msg){
+    toastMsg.textContent = msg; toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('show'), 2300);
+  }
+  function srcText(id){ const el = document.getElementById(id); return el ? el.textContent.replace(/^\n/, '').replace(/\s+$/,'') + '\n' : ''; }
+  function fallbackCopy(txt){ const t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.focus(); t.select(); try{document.execCommand('copy');}catch(e){} t.remove(); }
+
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const txt = srcText(btn.getAttribute('data-copy'));
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>showToast('הועתק')).catch(()=>{ fallbackCopy(txt); showToast('הועתק'); });
+      } else { fallbackCopy(txt); showToast('הועתק'); }
+    });
+  });
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold:.08 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
